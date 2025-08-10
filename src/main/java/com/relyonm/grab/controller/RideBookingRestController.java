@@ -1,0 +1,24 @@
+package com.relyonm.grab.controller;
+
+import com.relyonm.grab.controller.dto.RideBookingPersistDto;
+import com.relyonm.grab.service.RideBookingService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("ride-bookings")
+public class RideBookingRestController {
+
+  private final RideBookingService rideBookingService;
+
+  public RideBookingRestController(RideBookingService rideBookingService) {
+    this.rideBookingService = rideBookingService;
+  }
+
+  @PostMapping
+  public void create(@RequestBody RideBookingPersistDto rideBookingPersistDto) {
+    rideBookingService.create(rideBookingPersistDto);
+  }
+}
