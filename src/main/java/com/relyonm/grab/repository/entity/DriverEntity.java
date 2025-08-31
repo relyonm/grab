@@ -1,6 +1,6 @@
 package com.relyonm.grab.repository.entity;
 
-import com.relyonm.grab.repository.entity.enumeration.DriverStatus;
+import com.relyonm.grab.share.enumeration.DriverStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;

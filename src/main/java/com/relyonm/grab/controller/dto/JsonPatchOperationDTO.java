@@ -1,8 +1,8 @@
-package com.relyonm.grab.service.domain;
+package com.relyonm.grab.controller.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record JsonPatchOperation(
+public record JsonPatchOperationDTO(
   @NotBlank String op,
   @NotBlank String path,
   String from,     // optional, only for move/copy

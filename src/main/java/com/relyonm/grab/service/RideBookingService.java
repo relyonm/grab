@@ -3,8 +3,8 @@ package com.relyonm.grab.service;
 import com.relyonm.grab.repository.RideBookingRepository;
 import com.relyonm.grab.repository.entity.LocationEntity;
 import com.relyonm.grab.repository.entity.RideBookingEntity;
-import com.relyonm.grab.repository.entity.enumeration.RideBookingStatus;
-import com.relyonm.grab.service.domain.RideBookingCreate;
+import com.relyonm.grab.share.enumeration.RideBookingStatus;
+import com.relyonm.grab.service.domain.RideBooking;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -20,17 +20,17 @@ public class RideBookingService {
     this.rideBookingRepository = rideBookingRepository;
   }
 
-  public void create(RideBookingCreate rideBookingCreate) {
-    var rideBooking = new RideBookingEntity(
-      null, Long.valueOf(rideBookingCreate.passengerId()), null, new LocationEntity(rideBookingCreate
+  public void create(RideBooking rideBooking) {
+    var entity = new RideBookingEntity(
+      rideBooking.id(), Long.valueOf(rideBooking.passengerId()), null, new LocationEntity(rideBooking
         .pickup()
-        .lat(), rideBookingCreate
+        .lat(), rideBooking
           .pickup()
-          .lng()), new LocationEntity(rideBookingCreate.dropoff().lat(), rideBookingCreate
+          .lng()), new LocationEntity(rideBooking.dropoff().lat(), rideBooking
             .dropoff()
             .lng()), RideBookingStatus.OPEN, Set.of()
     );
-    var savedRideBooking = rideBookingRepository.save(rideBooking);
+    var savedRideBooking = rideBookingRepository.save(entity);
     rideDispatchService.findAndNotifyNearestDriver(savedRideBooking);
   }
 }

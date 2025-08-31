@@ -1,6 +1,6 @@
 package com.relyonm.grab.repository.entity;
 
-import com.relyonm.grab.repository.entity.enumeration.RideBookingStatus;
+import com.relyonm.grab.share.enumeration.RideBookingStatus;
 import jakarta.annotation.Nullable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;

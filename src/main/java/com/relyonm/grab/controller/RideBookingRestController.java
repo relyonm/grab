@@ -1,7 +1,8 @@
 package com.relyonm.grab.controller;
 
+import com.relyonm.grab.controller.dto.RideBookingDTO;
 import com.relyonm.grab.service.RideBookingService;
-import com.relyonm.grab.service.domain.RideBookingCreate;
+import com.relyonm.grab.service.domain.RideBooking;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("ride-bookings")
 public class RideBookingRestController {
 
+  private static RideBooking dtoToDomain(RideBookingDTO dto) {
+    return new RideBooking(null, dto.passengerId(), dto.pickup(), dto.dropoff());
+  }
+
   private final RideBookingService rideBookingService;
 
   public RideBookingRestController(RideBookingService rideBookingService) {
@@ -19,7 +24,7 @@ public class RideBookingRestController {
   }
 
   @PostMapping
-  public void create(@RequestBody @Valid RideBookingCreate rideBookingPersistDto) {
-    rideBookingService.create(rideBookingPersistDto);
+  public void create(@RequestBody @Valid RideBookingDTO rideBooking) {
+    rideBookingService.create(dtoToDomain(rideBooking));
   }
 }

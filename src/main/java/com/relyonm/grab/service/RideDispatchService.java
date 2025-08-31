@@ -9,8 +9,8 @@ import com.relyonm.grab.repository.entity.DriverEntity;
 import com.relyonm.grab.repository.entity.LocationEntity;
 import com.relyonm.grab.repository.entity.PassengerEntity;
 import com.relyonm.grab.repository.entity.RideBookingEntity;
-import com.relyonm.grab.repository.entity.enumeration.DriverStatus;
-import com.relyonm.grab.repository.entity.enumeration.RideBookingStatus;
+import com.relyonm.grab.share.enumeration.DriverStatus;
+import com.relyonm.grab.share.enumeration.RideBookingStatus;
 import com.relyonm.grab.share.exception.ResourceNotFoundException;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.Async;
@@ -70,7 +70,7 @@ public class RideDispatchService {
   private Optional<DriverEntity> findNearestAvailableDriver(LocationEntity pickupLocation,
     Set<Long> rejectedDriverIds) {
     return driverRepository
-      .findAvailableDrivers(DriverStatus.AVAILABLE, Optional
+      .findAvailable(DriverStatus.AVAILABLE, Optional
         .ofNullable(rejectedDriverIds)
         .orElse(Collections.emptySet())
         .toArray(Long[]::new))
@@ -144,6 +144,7 @@ public class RideDispatchService {
         rideBooking.pickupLocation(), rideBooking.dropoffLocation(), rideBooking.status(), updatedRejected
       ));
     }, 20);
+
     scheduledTasks.put(rideId, scheduledTask);
   }
 
