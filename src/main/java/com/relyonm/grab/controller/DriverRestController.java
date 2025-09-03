@@ -2,7 +2,6 @@ package com.relyonm.grab.controller;
 
 import com.relyonm.grab.controller.dto.DriverDTO;
 import com.relyonm.grab.service.DriverService;
-import com.relyonm.grab.service.domain.Driver;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +23,6 @@ public class DriverRestController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public void create(@RequestBody @Valid DriverDTO driverDTO) {
-    driverService.create(Driver.newDriver(driverDTO.fcmToken()));
+//    driverService.create(Driver.newDriver(driverDTO.fcmToken()));
   }
 }
